@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="history-panel">
+      <div class="history-header">
+        <span>Lịch sử</span>
+        <button type="button" class="history-clear" onclick="clearHistory()">Xoá</button>
+      </div>
+      <div class="history-filter-wrap">
+        <label for="historyFilter" class="history-filter-label">Lọc theo phép tính</label>
+        <select id="historyFilter" class="history-filter" onchange="applyHistoryFilter()">
+          <option value="">Tất cả</option>
+          <option value="+">Cộng (+)</option>
+          <option value="-">Trừ (-)</option>
+          <option value="*">Nhân (*)</option>
+          <option value="/">Chia (/)</option>
+          <option value="%">Phần dư (%)</option>
+          <option value="^">Lũy thừa (^)</option>
+          <option value="sqrt">Căn bậc hai (√)</option>
+          <option value="inv">Nghịch đảo (1/x)</option>
+        </select>
+      </div>
+      <ul class="history-list" id="historyList">
+        <li class="history-empty">Chưa có phép tính nào</li>
+      </ul>
+    </div>
+    <div class="calculator">
+    <div class="screen">
+      <div class="display">
+        <div class="expression">0</div>
+        <div class="result">0</div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="button" class="button clear" onclick="clearDisplay()">C</button>
+      <button type="button" class="button delete" onclick="deleteLast()">DEL</button>
+      <button type="button" class="button unary" onclick="performUnaryOperation('sqrt', '√')">√</button>
+      <button type="button" class="button unary" onclick="performUnaryOperation('inv', '1/x')">1/x</button>
+
+      <button type="button" class="button operator" onclick="performOperation('%')">%</button>
+      <button type="button" class="button operator" onclick="performOperation('^')">^</button>
+      <button type="button" class="button operator" onclick="performOperation('/')">/</button>
+      <button type="button" class="button operator" onclick="performOperation('*')">*</button>
+
+      <button type="button" class="button digit" onclick="appendNumber('7')">7</button>
+      <button type="button" class="button digit" onclick="appendNumber('8')">8</button>
+      <button type="button" class="button digit" onclick="appendNumber('9')">9</button>
+      <button type="button" class="button operator" onclick="performOperation('-')">-</button>
+
+      <button type="button" class="button digit" onclick="appendNumber('4')">4</button>
+      <button type="button" class="button digit" onclick="appendNumber('5')">5</button>
+      <button type="button" class="button digit" onclick="appendNumber('6')">6</button>
+      <button type="button" class="button operator" onclick="performOperation('+')">+</button>
+
+      <button type="button" class="button digit" onclick="appendNumber('1')">1</button>
+      <button type="button" class="button digit" onclick="appendNumber('2')">2</button>
+      <button type="button" class="button digit" onclick="appendNumber('3')">3</button>
+      <button type="button" class="button equal" onclick="handleEquals()">=</button>
+
+      <button type="button" class="button digit zero" onclick="appendNumber('0')">0</button>
+      <button type="button" class="button digit" onclick="toggleSign()">+/-</button>
+      <button type="button" class="button digit" onclick="appendDecimal()">.</button>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

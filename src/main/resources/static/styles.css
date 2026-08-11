@@ -1,0 +1,252 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f8;
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.history-panel {
+  background: #1e1e2f;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  max-height: 480px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.history-filter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 20px 8px;
+}
+
+.history-filter-label {
+  font-size: 0.75rem;
+  opacity: 0.72;
+}
+
+.history-filter {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 7px 10px;
+  font-size: 0.85rem;
+}
+
+.history-filter:focus {
+  outline: 1px solid rgba(90, 200, 250, 0.65);
+  border-color: rgba(90, 200, 250, 0.65);
+}
+
+.history-filter option {
+  color: #1e1e2f;
+}
+
+.history-clear {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.history-clear:hover {
+  background: rgba(255, 59, 48, 0.15);
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.history-list::-webkit-scrollbar { width: 4px; }
+.history-list::-webkit-scrollbar-track { background: transparent; }
+.history-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+.history-empty {
+  text-align: center;
+  opacity: 0.4;
+  font-size: 0.85rem;
+  padding: 20px;
+}
+
+.history-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 2px 8px;
+  transition: background 0.15s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.history-item .history-expr {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-item .history-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calculator {
+  background: #1e1e2f;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 320px;
+}
+
+.screen {
+  padding: 20px;
+  text-align: right;
+  min-height: 90px;
+  box-sizing: border-box;
+}
+
+.display {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px 20px;
+  word-wrap: break-word;
+}
+
+.expression {
+  font-size: 1rem;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.result {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 8px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.button {
+  border: none;
+  padding: 20px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button.key-active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.button.digit.key-active {
+  filter: brightness(1.18);
+  box-shadow: 0 0 0 2px rgba(90, 200, 250, 0.42) inset;
+}
+
+.button.operator.key-active {
+  filter: brightness(1.06);
+  box-shadow: 0 0 0 2px rgba(255, 204, 102, 0.52) inset;
+}
+
+.button.unary.key-active {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 2px rgba(120, 245, 190, 0.5) inset;
+}
+
+.button.equal.key-active {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 2px rgba(30, 30, 47, 0.32) inset;
+}
+
+.button.clear.key-active,
+.button.delete.key-active {
+  filter: brightness(1.1);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.36) inset;
+}
+
+.button.digit    { 
+    background: #2c2c44; 
+    color: #fff; 
+}
+
+
+.button.operator { 
+    background: #ff9f0a; 
+    color: #1e1e2f; 
+}
+.button.unary { 
+  background: #30d158; 
+  color: #1e1e2f; 
+}
+.button.clear    { 
+    background: #ff3b30; 
+    color: #fff; 
+}
+.button.delete   { 
+    background: #ff3b30; 
+    color: #fff; 
+}
+.button.equal    { 
+    background: #5ac8fa; 
+    color: #1e1e2f; 
+    grid-row: span 2; 
+}
