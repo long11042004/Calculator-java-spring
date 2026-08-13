@@ -2,7 +2,6 @@ package com.example.calculator.controller;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,14 +26,13 @@ public class HistoryController {
 
     @GetMapping
     public List<History> getHistory(@RequestParam(required = false) String op) {
-        if (op != null && !op.isBlank()) {
-            String expectedOperation = normalizeOperation(op);
-            return historyRepository.findTop20ByOrderByCreatedAtDesc()
-                    .stream()
-                    .filter(item -> Objects.equals(resolveOperation(item), expectedOperation))
-                    .toList();
+        String normalizedOperation = normalizeOperation(op);
+
+        if (normalizedOperation != null && !normalizedOperation.isBlank()) {
+            return historyRepository.findRecentHistoryByOperation(normalizedOperation);
         }
-        return historyRepository.findTop20ByOrderByCreatedAtDesc();
+
+        return historyRepository.findRecentHistory();
     }
 
     @PostMapping
@@ -61,35 +59,5 @@ public class HistoryController {
             case "inv" -> "inv";
             default -> normalized;
         };
-    }
-
-    private String resolveOperation(History item) {
-        String stored = normalizeOperation(item.getOperation());
-        if (stored != null) {
-            return stored;
-        }
-        return extractOperationFromExpression(item.getExpression());
-    }
-
-    private String extractOperationFromExpression(String expression) {
-        if (expression == null || expression.isBlank()) {
-            return null;
-        }
-
-        String expr = expression.trim();
-        if (expr.startsWith("√(")) {
-            return "sqrt";
-        }
-        if (expr.startsWith("1/x(")) {
-            return "inv";
-        }
-
-        String[] binaryOps = {"+", "-", "*", "/", "%", "^"};
-        for (String operator : binaryOps) {
-            if (expr.contains(" " + operator + " ")) {
-                return operator;
-            }
-        }
-        return null;
     }
 }

@@ -9,9 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "calculation_history")
+@Getter
+@NoArgsConstructor
 public class History {
 
     @Id
@@ -30,8 +34,6 @@ public class History {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    public History() {}
-
     public History(String expression, String result, String operation) {
         this.expression = expression;
         this.result = result;
@@ -44,10 +46,4 @@ public class History {
             createdAt = LocalDateTime.now();
         }
     }
-
-    public Long getId() { return id; }
-    public String getExpression() { return expression; }
-    public String getResult() { return result; }
-    public String getOperation() { return operation; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
 }
